@@ -4,11 +4,12 @@ from keras.layers import Dense, Input
 from keras.models import Model, load_model 
 import numpy as np
 import pandas as pd
+import csv
 from keras import regularizers
-
+import matplotlib.pyplot as plt
 
 # loadData()
-df = pd.read_csv("../data/0307/test1/exo_raw_data.csv").fillna(0)
+df = pd.read_csv("../../data/0307/test2/exo_raw_data.csv").fillna(0)
 print(df.describe())
 df_norm = (df - df.mean()) / df.std()
 df_norm = df_norm - df_norm.min()
@@ -16,6 +17,7 @@ print(df_norm.describe())
 
 df_norm = np.array(df_norm)
 x_train = df_norm
+time_series = np.arange(len(x_train))
 # x_test = df_norm[44540:54540, :]
 print(x_train.shape)
 # print(x_test.shape)
@@ -34,22 +36,36 @@ def trainModel():
     decoded = Dense(5, activation='relu')(decoded)
 
     autoencoder = Model(inputs=input_data, outputs=decoded)
-
+    # autoencoder.save("../model/autoencoderModel.h5")
     # construct the encoder model 
     encoder = Model(inputs=input_data, outputs=encoder_output)
-
+    encoder.save("../model/encoderModel072.h5")
     # compile and fit
     autoencoder.compile(optimizer='adam', loss='mse')
-    autoencoder.fit(x_train, x_train, epochs=500, batch_size=128, shuffle=True)
-    autoencoder.save("../model/autoencoderModel.h5")
+    autoencoder.fit(x_train, x_train, epochs=1000, batch_size=64, shuffle=True)
+    
 
 
 def testModel():
     # load model and test
-    autoencoder = load_model("../model/autoencoderModel.h5")
-    decoded_data = autoencoder.predict(x_train[100:110,:].reshape(10,5))
+    # autoencoder = load_model("../model/autoencoderModel.h5")
+    encoder = load_model("../model/encoderModel072.h5")
+    decoded_data = encoder.predict(x_train.reshape(len(x_train),5))
+
+    
+    with open("./test2.csv", "w",newline="") as f:
+        writer = csv.writer(f)
+        writer.writerows(decoded_data)
+    
+    fig1 = plt.figure('fig1')
+    plt.title("encoded data")
+    plt.plot(time_series, decoded_data, 'b--', label="encoded data")
+    plt.xlabel("time series")
+    plt.ylabel("value")
+    plt.legend(loc="upper right")
+    plt.show()
     print("decoded_data: ", decoded_data)
-    print("ground trueth: ", x_train[100:110,:].reshape(10,5))
+    # print("ground trueth: ", x_train[110:120,:].reshape(10,5))
 
 # trainModel()
 testModel()

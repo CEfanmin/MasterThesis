@@ -15,14 +15,14 @@ class ExoData(object):
         self.yaw_degree = ahrs["yaw_degree "]
         left_foot = pd.read_table(self.leftfoot_file)
         right_foot = pd.read_table(self.rightfoot_file)
-        self.left_pressure = left_foot["pressure "].iloc[0:54540]
-        self.right_pressure = right_foot["pressure "].iloc[0:54540]
+        self.left_pressure = left_foot["pressure "]
+        self.right_pressure = right_foot["pressure "]
 
 
     def visualizationData(self,):
-        time_len = np.arange(0,54540)
+        time_len = np.arange(0,31659)
         fig1 = plt.figure('fig1')
-        plt.title("0307-test1-ahrs data")
+        plt.title("0309-test3-ahrs data")
         plt.plot(time_len, self.roll_degree, 'g', label="roll_degree")
         plt.plot(time_len, self.pitch_degree, 'b', label="pitch_degree")
         plt.plot(time_len, self.yaw_degree, 'r', label="yaw_degree")
@@ -32,7 +32,7 @@ class ExoData(object):
 
 
         fig2 = plt.figure('fig2')
-        plt.title("0307-test1-pressure data")
+        plt.title("0309-test3-pressure data")
         plt.plot(time_len, self.left_pressure, 'g', label="left_pressure")
         plt.plot(time_len, self.right_pressure, 'b', label="right_pressure")
         plt.xlabel("time series")
@@ -49,10 +49,10 @@ class ExoData(object):
 
 # load raw sensor data
 def loadData():
-    exo = ExoData("../data/0307/test1/ahrs", "../data/0307/test1/left_foot","../data/0307/test1/right_foot")
+    exo = ExoData("../../data/0309/test3/ahrs", "../../data/0309/test3/left_foot","../../data/0309/test3/right_foot")
     exo.generatorData()
-    # exo.visualizationData()
-    exo_raw_state = exo.exoState()
-    exo_raw_state.to_csv("../data/0307/test1/exo_raw_data.csv")
+    exo.visualizationData()
+    # exo_raw_state = exo.exoState()
+    # exo_raw_state.to_csv("../../data/0309/test1/exo_raw_data.csv")
 
-# loadData()
+loadData()
