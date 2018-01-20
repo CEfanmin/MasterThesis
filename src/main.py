@@ -39,7 +39,7 @@ def trainModel():
             print(loss_t)
             
         temp_saver = rnn_model['saver']()
-        save_path = temp_saver.save(sess, os.path.join('../seq2seqmodel/', 'seq2seqmodelv3'))
+        save_path = temp_saver.save(sess, os.path.join('../seq2seqmodel/', 'seq2seqmodel'))
             
     print("Checkpoint saved at: ", save_path)
 
@@ -49,7 +49,7 @@ def testModel():
     init = tf.global_variables_initializer()
     with tf.Session() as sess:
         sess.run(init)
-        saver = rnn_model['saver']().restore(sess,  os.path.join('../seq2seqmodel/', 'seq2seqmodelv3'))
+        saver = rnn_model['saver']().restore(sess,  os.path.join('../seq2seqmodel/', 'seq2seqmodel'))
         feed_dict = {rnn_model['enc_inp'][t]: test_x[:, t, :] for t in range(input_seq_len)} # batch prediction
         feed_dict.update({rnn_model['target_seq'][t]: np.zeros([test_x.shape[0], output_dim], dtype=np.float32) for t in range(output_seq_len)})
         final_preds = sess.run(rnn_model['reshaped_outputs'], feed_dict)

@@ -4,7 +4,7 @@ import numpy as np
 df = pd.read_csv("../encodedata/test1.csv")
 # print(df.head())
 X_train = df.iloc[:50000,:].copy()
-X_test = df.iloc[10000:11000,:].copy()  # test data for diffrient state:stand/walk/rest/sit
+X_test = df.iloc[47000:48000,:].copy()  # test data for diffrient state:stand/walk/rest/sit
 
 # z-score transform 
 X_mean = X_train.mean()
@@ -41,5 +41,3 @@ def generate_test_samples(x = np.array(X_test).tolist(), y = np.array(y_test).to
     output_seq = np.take(y, output_batch_idxs, axis = 0)
 
     return input_seq, output_seq
-
-
