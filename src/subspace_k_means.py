@@ -15,7 +15,7 @@ from sklearn.utils import check_array
 from sklearn.utils import check_random_state
 from sklearn.utils import as_float_array
 from sklearn.utils.validation import FLOAT_DTYPES
-from sklearn.externals.joblib import Parallel
+from sklearn.externals.joblib import Parallels
 from sklearn.externals.joblib import delayed
 from sklearn.cluster import _k_means
 
@@ -259,7 +259,6 @@ def subspace_kmeans_single(
 
 class SubspaceKMeans(KMeans):
     """Subspace k-Means clustering
-
     Read more in
     Mautz, Dominik, et al.
     "Towards an Optimal Subspace for K-Means."
@@ -384,13 +383,12 @@ class SubspaceKMeans(KMeans):
             Training instances to cluster.
 
         y : Ignored
-
         """
         if sp.issparse(X):
             raise ValueError("SubspaceKMeans does not support sparse matrix")
         random_state = check_random_state(self.random_state)
         X = self._check_fit_data(X)
-
+        
         self.cluster_centers_, self.labels_, self.inertia_, self.n_iter_ = \
             subspace_k_means(
                 X,
@@ -406,7 +404,6 @@ class SubspaceKMeans(KMeans):
                 n_jobs=self.n_jobs,
                 return_n_iter=True
             )
-
         # === Beginning of original implementation of additional info ===
         d = X.shape[1]
         S_D = np.dot(X.T, X)
@@ -418,7 +415,6 @@ class SubspaceKMeans(KMeans):
         self.feature_importances_, self.V_ = np.linalg.eigh(Sigma)
         self.m_ = len(np.where(self.feature_importances_ < self.tol_eig)[0])
         # === End of original implementation of additional info ===
-
         return self
 
     def _check_test_data(self, X):

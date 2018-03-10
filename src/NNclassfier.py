@@ -1,5 +1,5 @@
 
-import os
+import os, time
 os.environ['KERAS_BACKEND'] = 'tensorflow'
 import win_unicode_console
 win_unicode_console.enable()
@@ -17,7 +17,6 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.pipeline import Pipeline
 from keras import regularizers
 from matplotlib import pyplot as plt
-
 
 
 # fix random seed for reproducibility
@@ -51,15 +50,17 @@ def BaselineModel():
     return model
 
 original_model = BaselineModel()
-'''
-xTrain, xTest, yTrain, yTest = loadData()
 
+xTrain, xTest, yTrain, yTest = loadData()
+start_time = time.time()
 original_hist = original_model.fit(xTrain, yTrain, epochs=300, verbose=1,batch_size=32,
                                 validation_data=(xTest, yTest))
+end_time = time.time() - start_time
+print("using time is: ", end_time)
 
 original_model.save_weights("../model/DenseModel.h5")
 
-# plot
+# plot training loss
 epochs = range(0, 300)
 original_val_loss = original_hist.history['loss']
 plt.plot(epochs, original_val_loss, 'b',label='Original model')
@@ -67,13 +68,16 @@ plt.xlabel('Epochs')
 plt.ylabel('training loss')
 plt.legend()
 plt.show()
-
 print("Saved model to disk")
-'''
 
-## test model
-test = np.array([0.948203,-107.960335,20.957085,115,24,-1.238987,-1.221456,1.692592,1.58796]).reshape(1,9)
-original_model.load_weights('../model/DenseModel.h5')
-result = original_model.predict(test)
-print(result)
+
+
+
+
+
+# ## test model
+# test = np.array([0.948203,-107.960335,20.957085,115,24,-1.238987,-1.221456,1.692592,1.58796]).reshape(1,9)
+# original_model.load_weights('../model/DenseModel.h5')
+# result = original_model.predict(test)
+# print(result)
 

@@ -4,7 +4,7 @@ from matplotlib import pyplot as plot
 from sklearn.model_selection import train_test_split
 from sklearn import preprocessing 
 from sklearn.linear_model import enet_path
-import math
+import math, time
 
 
 # load data
@@ -76,9 +76,10 @@ for i in range(nrow):
     rowNormalized = [(yOneVAll[i][j] - yMeans[j])/ySD[j] for j in range(nlabels)]
     yNormalized.append(rowNormalized)
 
+start_time = time.time()
 # number of cross-validation folds
-nxval = 10
-nAlphas=500
+nxval = 5
+nAlphas = 500
 misClass = [0.0] * nAlphas
 for ixval in range(nxval):
     # Defne test and training index sets
@@ -100,8 +101,7 @@ for ixval in range(nxval):
             ft_intercept=False, eps=0.1e-3, n_alphas=nAlphas,
             return_models=False))
     for iStep in range(1,nAlphas):
-        # Assemble the predictions for all the models, fnd largest
-        # prediction and calc error
+        # Assemble the predictions for all the models, fnd largest prediction and calc error
         allPredictions = []
         for iModel in range(nlabels):
             _, coefs, _ = models[iModel]
@@ -109,6 +109,7 @@ for ixval in range(nxval):
             # un-normalize the prediction for comparison
             predUnNorm = [(predTemp[j]*ySD[iModel] + yMeans[iModel]) for j in range(len(predTemp))]
             allPredictions.append(predUnNorm)
+        
         predictions = []
         for i in range(lenTest):
             listOfPredictions = [allPredictions[j][i] for j in range(nlabels) ]
@@ -118,9 +119,10 @@ for ixval in range(nxval):
 
 misClassPlot = [misClass[i]/nrow for i in range(1, nAlphas)]
 print("Misclassifcation Error Rate: ",min(misClassPlot))
-
+end_time = time.time() - start_time
+print("using time is: ", end_time)
 # plot figure
 plot.plot(misClassPlot)
 plot.xlabel("Penalty Parameter Steps")
-plot.ylabel(("Misclassifcation Error Rate"))
+plot.ylabel("Misclassifcation Error Rate")
 plot.show()

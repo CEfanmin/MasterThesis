@@ -58,28 +58,38 @@ def loadData():
 
 loadData()
 '''
-
+'''
 ## plot all data
-df = pd.read_csv("../../data/0307/test1/exo_raw_data2.csv")
+df = pd.read_csv("../../data/0307/test1/exo_sample_data_with_targets.csv")
 left_hip_joint = df["left_hip_joint"]
 right_hip_joint = df["left_hip_joint"]
-left_knee_joint = df["left_knee_joint"]
-right_knee_joint = df["right_knee_joint"]
-time_len = np.arange(0,54539)
+# left_knee_joint = df["left_knee_joint"]
+# right_knee_joint = df["right_knee_joint"]
+time_len = np.arange(0,5453)
 
 fig1 = plt.figure('fig1')
 plt.title("0307-test1-all data")
 plt.plot(time_len, left_hip_joint, 'b', label="left_hip_joint")
 plt.plot(time_len, right_hip_joint, 'r', label="right_hip_joint")
-plt.plot(time_len, left_knee_joint, 'y', label="left_knee_joint")
-plt.plot(time_len, right_knee_joint, 'g', label="right_knee_joint")
+# plt.plot(time_len, left_knee_joint, 'y', label="left_knee_joint")
+# plt.plot(time_len, right_knee_joint, 'g', label="right_knee_joint")
 
 plt.xlabel("time series")
 plt.ylabel("value")
 plt.legend(loc="upper right")
 plt.show(fig1)
+'''
 
+def countData():
+    raw_data = pd.read_csv("../../data/0307/test1/exo_sample_data_with_targets.csv")
+    print(raw_data.describe())
+    from collections import Counter
+    labels = []
+    for featVec in raw_data.values:
+        labels.append(featVec[-1])
+    labelCnt = Counter(labels)
+    return labelCnt
 
-
+print(countData())
 
 

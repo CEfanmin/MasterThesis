@@ -21,10 +21,10 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.multiclass import OneVsRestClassifier
 svm_est = Pipeline([('scaler',StandardScaler()),('svc',OneVsRestClassifier(SVC()))])
-# Cs = [0.001, 0.01, 0.1, 1, 10]
-# gammas = [0.001, 0.01, 0.1, 1, 10]
-Cs = [10]
-gammas= [0.01]
+Cs = [0.1, 1, 10]
+gammas = [0.01, 0.1]
+# Cs = [10]
+# gammas= [0.01]
 param_grid = dict(svc__estimator__gamma=gammas, svc__estimator__C=Cs)
 
 
