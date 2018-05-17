@@ -21,7 +21,7 @@ input_dim = X_train.shape[1]
 # num of output signals
 output_dim = y_train.shape[1]
 # num of stacked lstm layers 
-num_stacked_layers = 2 
+num_stacked_layers = 10 
 # gradient clipping - to avoid gradient exploding
 GRADIENT_CLIPPING = 2.5
 
@@ -70,9 +70,10 @@ def build_graph(feed_previous = False):
             cells = []
             for i in range(num_stacked_layers):
                 with tf.variable_scope('RNN_{}'.format(i)):
-                    cells.append(tf.contrib.rnn.LSTMCell(hidden_dim))
+                  cells.append(tf.contrib.rnn.LSTMCell(hidden_dim))
             cell = tf.contrib.rnn.MultiRNNCell(cells)
-         
+
+
         def _rnn_decoder(decoder_inputs,
                         initial_state,
                         cell,

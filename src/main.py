@@ -39,7 +39,7 @@ def trainModel():
             print(loss_t)
             
         temp_saver = rnn_model['saver']()
-        save_path = temp_saver.save(sess, os.path.join('../seq2seqmodel/', 'seq2seqmodel'))
+        save_path = temp_saver.save(sess, os.path.join('../seq2seqmodel/', 'indRNNmodel'))
             
     print("Checkpoint saved at: ", save_path)
 
@@ -68,5 +68,6 @@ def testModel():
         plt.show()
 
 if __name__ =="__main__":
-    # trainModel()
-    testModel()
+    trainModel()
+    # testModel()
+

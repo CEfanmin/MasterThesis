@@ -9,7 +9,7 @@ from matplotlib import pyplot as plt
 from sklearn.externals import joblib
 import time
 
-
+'''
 featureName =np.array(['roll_degree', 'pitch_degree', 'yaw_degree', 
                         'left_pressure','right_pressure', 
                         'left_hip_joint', 'right_hip_joint', 'left_knee_joint','right_knee_joint'])
@@ -92,5 +92,3 @@ elif finalPrediction[0]==3:
     print("standing")
 else:
     print("no data")
-'''
-

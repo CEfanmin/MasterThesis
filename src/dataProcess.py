@@ -82,7 +82,14 @@ plt.show(fig1)
 
 def countData():
     raw_data = pd.read_csv("../../data/0307/test1/exo_sample_data_with_targets.csv")
-    print(raw_data.describe())
+    raw_data.to_excel("../../data/0307/test1/exo_sample_data_with_targets.xls")
+    # print(raw_data.describe())
+    from matplotlib import pyplot as plt
+    plt.figure()
+    length = range(len(raw_data))
+    plt.plot(length,np.array(raw_data['targets']))
+    plt.show()
+
     from collections import Counter
     labels = []
     for featVec in raw_data.values:

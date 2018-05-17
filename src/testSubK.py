@@ -25,7 +25,7 @@ if __name__ =="__main__":
 
     from collections import Counter
     print("Counter(exo_targets) is ",Counter(exo_targets))
-    '''
+
     # do PCA without decomposition
     from sklearn.decomposition import PCA
     full_pca = PCA(n_components=n_features, random_state=14).fit(normed_exo_data)
@@ -163,3 +163,4 @@ if __name__ =="__main__":
     plt.xlabel('1st feature of the Noise-Space')
     plt.ylabel('2nd feature')
     plt.show()
+    '''
