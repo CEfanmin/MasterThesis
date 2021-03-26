@@ -1,4 +1,4 @@
-# ForecastBasedGraph
+# 硕士毕业2年半，我的这个工作被实验室整理成论文《Exoskeleton Cloud-Brain Platform and Its Application in Safety Assessment》，发表在SCI期刊《Assembly Automation》2020年影响因子/JCR分区：1.582/Q3
 
 ## 主要思路
 
