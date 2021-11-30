@@ -1,5 +1,7 @@
 #### 硕士毕业2年半，此工作被实验室整理成论文《Exoskeleton Cloud-Brain Platform and Its Application in Safety Assessment》，发表在SCI期刊《Assembly Automation》，该期刊2020年影响因子/JCR分区：1.582/Q3
 
+### Xu F, Huang R, Cheng H, et al. Exoskeleton cloud-brain platform and its application in safety assessment[J]. Assembly Automation, 2021.
+
 ## 主要思路
 
 	1、实体机器人通过云脑机器人架构，在云端形成了克隆模型的虚拟机器人，每个虚拟机器人拥有实体机器人的传感器数据。
