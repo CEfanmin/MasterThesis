@@ -1,6 +1,6 @@
 #### 硕士毕业2年半，此工作被实验室整理成论文《Exoskeleton Cloud-Brain Platform and Its Application in Safety Assessment》，发表在SCI期刊《Assembly Automation》，该期刊2020年影响因子/JCR分区：1.582/Q3
 
-### Xu F, Huang R, Cheng H, et al. Exoskeleton cloud-brain platform and its application in safety assessment[J]. Assembly Automation, 2021.
+### Xu, F., Huang, R., Cheng, H., Fan, M., & Qiu, J. (2021). Exoskeleton cloud-brain platform and its application in safety assessment. Assembly Automation.
 
 ## 主要思路
 
